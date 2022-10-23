@@ -1,7 +1,8 @@
 import React, { Component } from "react"
 import axios from "axios"
 import { Searchbar } from "components/Searchbar/Searchbar"
-import {ImageGallery} from 'components/ImageGallery/ImageGallery'
+import { ImageGallery } from 'components/ImageGallery/ImageGallery'
+import { Button } from "./Button/Button"
 
 const apiKey = "29821254-cc8d55b85aa42c363f8211fb8"
 
@@ -27,10 +28,15 @@ export class App extends Component {
 
 
   render() {
+    let {images} = this.state
     return (
       <>
         <Searchbar onSubmit={this.formSubmitHandler} />
         <ImageGallery images={this.state.images} />
+        {images.length > 0 && <Button /> }
+        
+        
+      
       </>
     )
   }
