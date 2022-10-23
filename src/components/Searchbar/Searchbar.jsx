@@ -3,22 +3,46 @@ import React, { Component } from "react"
 export class Searchbar extends Component{
      state = {
        name : ""
+  }
+  
+    handleInputChange = event => {
+    const {name, value} = event.currentTarget
+    this.setState(
+      {
+        [name]: value,
+      })
+  }
+  
+  handleSubmit = e => {
+    e.preventDefault();
+    this.props.onSubmit(this.state)
+    this.reset()
+    
     }
 
-    render(){
+  reset = () => {
+        this.setState({
+    name: '',
+    })
+    }
+
+  render() {
+       const { name } = this.state
         return (
             <header className="searchbar">
-  <form className="form">
-    <button type="submit" class="button">
+  <form className="form" onSubmit={this.handleSubmit}>
+    <button type="submit" className="button">
       <span className="button-label">Search</span>
     </button>
 
     <input
       className="input"
       name="name"
+      value={name}
+      onChange={this.handleInputChange}
       type="text"
-      autocomplete="off"
-      autofocus
+      autoComplete="off"
+      autoFocus
       placeholder="Search images and photos"
     />
   </form>
